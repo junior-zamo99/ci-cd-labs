@@ -4,6 +4,8 @@ node_modules/
 # Archivos generados por compilación y pruebas
 dist/
 coverage/
+tmp/
+output/
 
 # Variables de entorno
 .env

@@ -1,8 +1,8 @@
 # Laboratorios de CI/CD con NestJS
 
-Repositorio base para los laboratorios del Módulo 4 del diplomado. El proyecto
-contiene una aplicación NestJS mínima en `app/` y un primer pipeline de
-Integración Continua implementado con GitHub Actions.
+Repositorio evolutivo para los laboratorios del Módulo 4 del diplomado. El
+proyecto contiene una aplicación NestJS en `app/` y un pipeline de Integración
+Continua implementado con GitHub Actions.
 
 ## Laboratorio 1: Primer Pipeline de Integración Continua
 
@@ -19,9 +19,42 @@ El pipeline realiza las siguientes operaciones:
 5. Muestra información del sistema operativo.
 6. Finaliza correctamente.
 
-En este primer laboratorio el pipeline todavía no compila la aplicación. La
-compilación y las pruebas automatizadas se incorporarán progresivamente en los
-siguientes laboratorios.
+En este primer laboratorio el pipeline todavía no compilaba la aplicación. La
+compilación se incorpora en el Laboratorio 2 y las pruebas automatizadas se
+integrarán en el Laboratorio 3.
+
+## Laboratorio 2: Branching, Pull Requests y build automatizado
+
+El trabajo se desarrolla en ramas de funcionalidad y se integra a `main`
+mediante Pull Requests. El pipeline se ejecuta automáticamente con dos eventos:
+
+- `push` sobre cualquier rama;
+- `pull_request` dirigido a `main`.
+
+Además de verificar el entorno, el pipeline utiliza Node.js 24, instala las
+dependencias con `npm ci` y compila la aplicación NestJS con `npm run build`.
+Un fallo durante la instalación o la compilación detiene el job y evita que la
+validación sea exitosa.
+
+### Funcionalidad agregada
+
+La rama `feature/add-project-info` incorpora el endpoint:
+
+```http
+GET /project-info
+```
+
+Respuesta esperada:
+
+```json
+{
+  "name": "ci-cd-labs",
+  "module": "Módulo 4 - CI/CD",
+  "framework": "NestJS",
+  "version": "1.0.0",
+  "status": "active"
+}
+```
 
 ## Estructura
 
@@ -50,8 +83,10 @@ npm install
 npm run start:dev
 ```
 
-La aplicación estará disponible en `http://localhost:3000` y responderá
-`Hello World!`.
+La aplicación estará disponible en `http://localhost:3000`.
+
+- `GET /` responde `Hello World!`.
+- `GET /project-info` devuelve la información del proyecto.
 
 ## Publicar el repositorio
 
