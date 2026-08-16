@@ -1,11 +1,17 @@
-name: Pipeline Laboratorio 1
+name: Pipeline CI - NestJS
 
 on:
   push:
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  primer-pipeline:
+  verificar-entorno:
     name: Verificar entorno de CI
     runs-on: ubuntu-latest
 
@@ -26,4 +32,33 @@ jobs:
         run: uname -a
 
       - name: Confirmar finalización
-        run: echo "Pipeline finalizado correctamente"
+        run: echo "Verificación del entorno finalizada correctamente"
+
+  compilar:
+    name: Compilar aplicación NestJS
+    needs: verificar-entorno
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v6
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar proyecto
+        run: npm run build
+
+      - name: Confirmar compilación
+        run: echo "Aplicación NestJS compilada correctamente"
