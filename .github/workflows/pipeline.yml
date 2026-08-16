@@ -1,0 +1,29 @@
+name: Pipeline Laboratorio 1
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  primer-pipeline:
+    name: Verificar entorno de CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+
+      - name: Mostrar mensaje de bienvenida
+        run: echo "Bienvenido al primer pipeline de Integración Continua"
+
+      - name: Mostrar fecha y hora de ejecución
+        run: date
+
+      - name: Mostrar versión de Git
+        run: git --version
+
+      - name: Mostrar información del sistema operativo
+        run: uname -a
+
+      - name: Confirmar finalización
+        run: echo "Pipeline finalizado correctamente"

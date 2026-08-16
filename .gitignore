@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Archivos generados por compilación y pruebas
+dist/
+coverage/
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editores y sistema operativo
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
