@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Obtener el repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Mostrar mensaje de bienvenida
         run: echo "Bienvenido al primer pipeline de Integración Continua"

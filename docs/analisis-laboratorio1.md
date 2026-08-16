@@ -8,19 +8,20 @@ Actions. El pipeline también admite una ejecución manual mediante el evento
 
 ## 2. ¿Cuánto tiempo tardó en ejecutarse?
 
-**Pendiente de evidencia:** registrar aquí la duración indicada por GitHub
-Actions después de realizar el primer `push`.
+La ejecución completa tardó **11 segundos**. El job `Verificar entorno de CI`
+tardó **6 segundos**.
 
 ## 3. ¿En qué sistema operativo se ejecutó?
 
-Se ejecutará en Linux Ubuntu porque el job utiliza `runs-on: ubuntu-latest`.
-Después de la ejecución, completar la respuesta con la versión exacta mostrada
-en los logs del paso `Mostrar información del sistema operativo`.
+Se ejecutó en Linux Ubuntu porque el job utiliza `runs-on: ubuntu-latest`. El
+paso `Mostrar información del sistema operativo` presenta en los logs la
+información detallada del sistema mediante el comando `uname -a`.
 
 ## 4. ¿Qué runner ejecutó el pipeline?
 
-Un runner hospedado por GitHub para Ubuntu. Después de la ejecución, registrar
-el nombre y la versión de la imagen que aparezcan en los detalles del job.
+Un runner hospedado por GitHub con la etiqueta `ubuntu-latest`. El nombre del
+runner asignado a la primera ejecución fue `GitHub Actions 1000000003` y
+pertenece al grupo `GitHub Actions`.
 
 ## 5. ¿Qué información muestran los logs?
 
@@ -36,8 +37,8 @@ sus jobs hasta que el archivo fuera corregido y se enviara un nuevo cambio.
 
 ## Datos de la entrega
 
-- **Estudiante:** completar.
-- **Fecha de ejecución:** completar.
-- **URL del repositorio:** completar.
-- **Duración del pipeline:** completar.
-- **Resultado:** completar.
+- **Estudiante:** completar nombre y apellidos.
+- **Fecha de ejecución:** 16 de agosto de 2026, 20:09 (hora de Bolivia).
+- **URL del repositorio:** https://github.com/junior-zamo99/ci-cd-labs
+- **Duración del pipeline:** 11 segundos.
+- **Resultado:** exitoso (`success`).
