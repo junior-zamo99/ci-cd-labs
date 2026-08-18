@@ -25,7 +25,8 @@ describe('AppService', () => {
     });
 
     it('should identify the project as active', () => {
-      expect(appService.getProjectInfo().status).toBe('active');
+      // Error intencional del Laboratorio 3 para comprobar el Quality Gate.
+      expect(appService.getProjectInfo().status).toBe('inactive');
     });
   });
 });
