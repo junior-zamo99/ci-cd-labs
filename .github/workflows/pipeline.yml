@@ -62,3 +62,50 @@ jobs:
 
       - name: Confirmar compilación
         run: echo "Aplicación NestJS compilada correctamente"
+
+  pruebas:
+    name: Ejecutar pruebas unitarias
+    needs: compilar
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v6
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar pruebas y generar cobertura
+        run: npm run test:ci
+
+      - name: Publicar reporte de pruebas
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-pruebas-${{ github.run_number }}
+          path: app/test-results/junit.xml
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Publicar reporte de cobertura
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-cobertura-${{ github.run_number }}
+          path: app/coverage/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Confirmar Quality Gate
+        run: echo "Quality Gate superado; todas las pruebas finalizaron correctamente"

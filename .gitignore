@@ -4,6 +4,7 @@ node_modules/
 # Archivos generados por compilación y pruebas
 dist/
 coverage/
+test-results/
 tmp/
 output/
 

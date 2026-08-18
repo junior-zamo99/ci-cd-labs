@@ -56,6 +56,29 @@ Respuesta esperada:
 }
 ```
 
+## Laboratorio 3: Pruebas automatizadas y Quality Gate
+
+El pipeline incorpora un tercer job llamado `Ejecutar pruebas unitarias`. Este
+job comienza únicamente después de que la compilación finaliza correctamente y
+ejecuta Jest mediante `npm run test:ci`.
+
+La ejecución genera y publica dos artefactos descargables en GitHub Actions:
+
+- `reporte-pruebas-<número>`: reporte JUnit en formato XML;
+- `reporte-cobertura-<número>`: reporte HTML, LCOV y Cobertura XML.
+
+Si una prueba falla, el job queda en estado fallido y el pipeline no supera el
+Quality Gate. Los pasos de publicación utilizan `always()` para conservar los
+reportes disponibles incluso cuando la validación encuentra un error.
+
+Para ejecutar la misma validación localmente:
+
+```bash
+cd app
+npm ci
+npm run test:ci
+```
+
 ## Estructura
 
 ```text
@@ -100,12 +123,14 @@ git push -u origin main
 Reemplazar `USUARIO` por el nombre de usuario de GitHub. El `push` iniciará el
 pipeline automáticamente.
 
-## Evidencias pendientes
+## Evidencias del Laboratorio 3
 
-Una vez ejecutado el workflow en GitHub, se deben conservar:
+Después de publicar la rama, se deben conservar:
 
-- URL pública o privada del repositorio.
-- Captura del pipeline finalizado correctamente.
-- Captura de los pasos y registros del job `Verificar entorno de CI`.
+- Captura del pipeline con los tres jobs finalizados correctamente.
+- Captura de los registros del job `Ejecutar pruebas unitarias`.
+- Captura de los artefactos de pruebas y cobertura.
+- Captura de una ejecución fallida provocada por una prueba.
+- Captura de la ejecución corregida y exitosa.
 - Copia del archivo `pipeline.yml`.
 - Documento PDF con las respuestas del análisis.
